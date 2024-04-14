@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 182 30">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke-width: 0px;
+      }
+
+      .cls-3 {
+        clip-path: url(#clippath-1);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-2" x="21" y="2.9" width="140" height="24.2"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-2" x="22.3" y="4.5" width="137.4" height="21"/>
+    </clipPath>
+  </defs>
+  <g id="Inamara_Arruda" data-name="Inamara Arruda">
+    <g class="cls-1">
+      <g class="cls-3">
+        <image width="544" height="180" transform="translate(22.3 -6.6) scale(.3)" xlink:href="../../../../../../../logos parceiros/inamaraarruda_logo-pb.png"/>
+      </g>
+    </g>
+  </g>
+</svg>
