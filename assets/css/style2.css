@@ -1740,7 +1740,7 @@ video {
   width: 100%;
   z-index: 1;
 }
-@media (max-width: 1600px) {
+@media (max-width: 8600px) {
   .banner-area3 .banner-wrapper .banner-content {
     max-width: 535px;
   }
