@@ -26,6 +26,7 @@
     <!--  Style CSS  -->
     <link rel="stylesheet" href="assets/css/preloader.css">
     <link rel="stylesheet" href="assets/css/style2.css">
+    <link rel="stylesheet" href="assets/css/form_pro.css">
     <!-- Title -->
     <title>Onebitcode PRO - Acesso Vitalício</title>
     <link rel="icon" href="assets/img/red-hand.png" type="image/gif" sizes="20x20">
@@ -2245,7 +2246,9 @@
                                                 
                                             </ul>
                                             <div class="pay-btn">
-                                                <a class="primary-btn3" href="https://pay.hotmart.com/A92849833N?off=snwrbkp2&checkoutMode=10">ME INSCREVER</a>
+                                                <a class="primary-btn3" href="#" data-toggle="modal"
+                                                    data-target="#PROPrecheckout">ME
+                                                    INSCREVER</a>
                                             </div>
                                         </div>
                                     </div>
@@ -2804,12 +2807,110 @@
     </footer>
     <!-- End Footer section -->
 
+     <!-- Modal PRO -->
+     <div class="modal fade" id="PROPrecheckout" tabindex="-1" role="dialog"
+     aria-labelledby="PROPrecheckout" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content" style="background-color: #151515 !important;">
+             <div class="modal-body">
+
+                 <form method="POST" action="https://onebitcode84724.activehosted.com/proc.php" id="_form_61_"
+                     class="_form _form_61 _inline-form  " novalidate data-styles-version="5">
+                     <input type="hidden" name="u" value="61" />
+                     <input type="hidden" name="f" value="61" />
+                     <input type="hidden" name="s" />
+                     <input type="hidden" name="c" value="0" />
+                     <input type="hidden" name="m" value="0" />
+                     <input type="hidden" name="act" value="sub" />
+                     <input type="hidden" name="v" value="2" />
+                     <input type="hidden" name="or" value="df91de97cf70079d4aa98cd33ee9c7d2" />
+                     <div class="_form-content">
+                         <div class="_form_element _x68650152 _full_width _clear">
+                             <div class="_form-title">
+                                 Programador(a), preencha os campos abaixo para prosseguir para o PRO. 🤘
+                             </div>
+                         </div>
+                         <div class="_form_element _x66094535 _full_width _clear">
+                             <div class="_html-code">
+                                 <br>
+                             </div>
+                         </div>
+                         <div class="_form_element _x48938950 _full_width ">
+                             <label for="fullname" class="_form-label">
+                                 Nome completo*
+                             </label>
+                             <div class="_field-wrapper">
+                                 <input type="text" id="fullname" name="fullname" placeholder="Digite seu nome"
+                                     required />
+                             </div>
+                         </div>
+                         <div class="_form_element _x55161733 _full_width ">
+                             <label for="email" class="_form-label">
+                                 E-mail*
+                             </label>
+                             <div class="_field-wrapper">
+                                 <input type="text" id="email" name="email" placeholder="Digite seu e-mail"
+                                     required />
+                             </div>
+                         </div>
+                         <div class="_form_element _x13337346 _full_width ">
+                             <label for="phone" class="_form-label">
+                                 Telefone
+                             </label>
+                             <div class="_field-wrapper">
+                                 <input type="text" id="phone" name="phone" placeholder="(XX) XXXXX-XXXX" />
+                             </div>
+                         </div>
+                         <div class="_form_element _x06953227 _full_width _clear">
+                             <div class="_html-code">
+                                 <a href="https://onebitcode.com/termosdeuso" target="blank">
+                                     Termos de uso
+                                 </a>
+                             </div>
+                         </div>
+                         <div class="_form_element _x38963234 _full_width ">
+                             <fieldset class="_form-fieldset">
+                                 <div class="_row">
+                                     <legend for="field[35][]" class="_form-label">
+                                     </legend>
+                                 </div>
+                                 <input data-autofill="false" type="hidden" id="field[35][]" name="field[35][]"
+                                     value="~|">
+                                 <div class="_row _checkbox-radio">
+                                     <input id="field_35Sim" type="checkbox" name="field[35][]" value="Sim" required>
+                                     <span>
+                                         <label for="field_35Sim">
+                                             Li e concordo*
+                                         </label>
+                                     </span>
+                                 </div>
+                             </fieldset>
+                         </div>
+                         <div class="_button-wrapper _full_width">
+                             <button id="_form_61_submit" class="_submit" type="submit">
+                                 Quero me matricular no PRO
+                             </button>
+                         </div>
+                         <div class="_clear-element">
+                         </div>
+                     </div>
+                     <div class="_form-thank-you" style="display:none;">
+                     </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+
+
 
     <!--  Main jQuery  -->
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <!-- Popper and Bootstrap JS -->
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
     <!-- Swiper slider JS -->
     <script src="assets/js/swiper-bundle.min.js"></script>
     <!-- Waypoints JS -->
@@ -2831,6 +2932,8 @@
     <!-- Custom JS -->
     <script src="assets/js/preloader.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/form_PRO.js"></script>
+
     <script>
         $(".marquee_text").marquee({
             direction: "left",
