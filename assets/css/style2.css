@@ -8982,7 +8982,7 @@ footer .footer-btm .footer-btn-content .footer-social ul li a:hover {
 }
 
 .error-page-bg {
-  background-image: url(../img/inner-pages/error-bg.png), linear-gradient(#1d1d1d, #1d1d1d);
+  background-image: linear-gradient(#171717, #1d1d1d);
   background-size: cover;
   background-repeat: no-repeat;
   padding: 150px 0;
