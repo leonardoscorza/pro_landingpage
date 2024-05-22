@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  window.cfields = { "35": "li_e_aceito_os_termos_de_uso_e_poltica_de_privacidade" };
+  window.cfields = { "63": "li_e_aceito_os_termos_de_uso_e_poltica_de_privacidade" };
   window._show_thank_you = function (id, message, trackcmp_url, email) {
     var form = document.getElementById('_form_' + id + '_'), thank_you = form.querySelector('._form-thank-you');
     form.querySelector('._form-content').style.display = 'none';
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   window._load_script = function (url, callback, isSubmit) {
     var head = document.querySelector('head'), script = document.createElement('script'), r = false;
-    var submitButton = document.querySelector('#_form_61_submit');
+    var submitButton = document.querySelector('#_form_63_submit');
     script.charset = 'utf-8';
     script.src = url;
     if (callback) {
@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
     script.onerror = function () {
       if (isSubmit) {
         if (script.src.length > 10000) {
-          _show_error("61", "Desculpe, seu envio falhou. Deixe suas respostas mais curtas e tente novamente.");
+          _show_error("63", "Desculpe, seu envio falhou. Deixe suas respostas mais curtas e tente novamente.");
         } else {
-          _show_error("61", "Desculpe, seu envio falhou. Tente novamente.");
+          _show_error("63", "Desculpe, seu envio falhou. Tente novamente.");
         }
         submitButton.disabled = false;
         submitButton.classList.remove('processing');
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
     var _removed = false;
-    var form_to_submit = document.getElementById('_form_61_');
+    var form_to_submit = document.getElementById('_form_63_');
     var allInputs = form_to_submit.querySelectorAll('input, select, textarea'), tooltips = [], submitted = false;
 
     var getUrlParam = function (name) {
@@ -477,16 +477,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var _form_serialize = function (form) { if (!form || form.nodeName !== "FORM") { return } var i, j, q = []; for (i = 0; i < form.elements.length; i++) { if (form.elements[i].name === "") { continue } switch (form.elements[i].nodeName) { case "INPUT": switch (form.elements[i].type) { case "tel": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].previousSibling.querySelector('div.iti__selected-dial-code').innerText) + encodeURIComponent(" ") + encodeURIComponent(form.elements[i].value)); break; case "text": case "number": case "date": case "time": case "hidden": case "password": case "button": case "reset": case "submit": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "checkbox": case "radio": if (form.elements[i].checked) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)) } break; case "file": break }break; case "TEXTAREA": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "SELECT": switch (form.elements[i].type) { case "select-one": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "select-multiple": for (j = 0; j < form.elements[i].options.length; j++) { if (form.elements[i].options[j].selected) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].options[j].value)) } } break }break; case "BUTTON": switch (form.elements[i].type) { case "reset": case "submit": case "button": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break }break } } return q.join("&") };
 
+
+    function downloadFile(filePath, fileName) {
+      // Criar um elemento <a> temporário para iniciar o download
+      var link = document.createElement('a');
+      link.href = filePath;
+      link.download = fileName;
+
+      // Adicionar o link ao documento, clicar nele, e removê-lo
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  }
+
     const formSupportsPost = false;
     var form_submit = function (e) {
       e.preventDefault();
       if (validate_form()) {
         // use this trick to get the submit button & disable it using plain javascript
-        var submitButton = e.target.querySelector('#_form_61_submit');
+        var submitButton = e.target.querySelector('#_form_63_submit');
         submitButton.disabled = true;
         submitButton.classList.add('processing');
         var serialized = _form_serialize(
-          document.getElementById('_form_61_')
+          document.getElementById('_form_63_')
         ).replace(/%0A/g, '\\n');
         var err = form_to_submit.querySelector('._form_error');
         err ? err.parentNode.removeChild(err) : false;
@@ -513,6 +526,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           _load_script('https://onebitcode84724.activehosted.com/proc.php?' + serialized + '&jsonp=true', null, true);
         }
+
+        // downloadFile('assets/js/ementa.pdf', 'Ementa Full Stack JavaScript Profissional.pdf');
       }
       return false;
     };
