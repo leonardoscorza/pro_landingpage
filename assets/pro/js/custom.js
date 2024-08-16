@@ -297,6 +297,46 @@
             },
         }
     });
+
+    var swiper = new Swiper(".home3-success-students", {
+        loop: true,
+        slidesPerView: 3,
+        spaceBetween: 30,
+        speed: 1000,
+        pagination: {
+            el: ".swiper-pagination111",
+            clickable: true,
+        },
+        autoplay: {
+            delay: 5000
+        },
+        breakpoints: {
+            280: {
+                slidesPerView: 1,
+            },
+            386: {
+                slidesPerView: 1,
+            },
+            576: {
+                slidesPerView: 1,
+            },
+            768: {
+                slidesPerView: 2,
+            },
+            992: {
+                slidesPerView: 2
+            },
+            1200: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+
+            },
+            1400: {
+                slidesPerView: 3
+            },
+        }
+    });
+
     //HOme 3 Testimonial slider
     var swiper = new Swiper(".home3-testimonial-slider", {
         loop: true,

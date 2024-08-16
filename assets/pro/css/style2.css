@@ -5184,6 +5184,62 @@ video {
   opacity: 1;
 }
 
+
+/* swiper com bolinhas */
+
+.swiper-pagination111 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .swiper-pagination111 {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.swiper-pagination111 .swiper-pagination-bullet {
+  height: 14px;
+  width: 14px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  position: relative;
+}
+
+.swiper-pagination111 .swiper-pagination-bullet::after {
+  content: "";
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background-color: var(--theme-color);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.swiper-pagination111 .swiper-pagination-bullet-active {
+  border-color: var(--theme-color);
+}
+
+.swiper-pagination111 .swiper-pagination-bullet-active::after {
+  opacity: 1;
+}
+
+
+/* final do swiper com bolinhas */
+
+
+
+
 .home3-testimonil-area .home3-testimonial-slider {
   margin-top: 40px;
   padding-top: 40px;
