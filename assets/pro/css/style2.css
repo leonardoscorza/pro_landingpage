@@ -5113,10 +5113,11 @@ video {
 @media (max-width: 1399px) {
   .home3-success-stories-area .success-storie-card .success-content h3 a {
     font-size: 24px;
+    color: #ffffff;
   }
 }
 .home3-success-stories-area .success-storie-card .success-content h3 a:hover {
-  color: var(--theme-color);
+  color: #ffffff;
 }
 .home3-success-stories-area .success-storie-card .success-content .view-btn {
   position: absolute;
@@ -6012,7 +6013,7 @@ video {
   transition: 0.4s;
 }
 .home3-blog-area .single-blog .blog-content .blog-meta li a:hover {
-  color: var(--theme-color);
+  color: #ffffff;
 }
 .home3-blog-area .single-blog .blog-content h4 {
   margin-bottom: 0;
@@ -9757,8 +9758,7 @@ footer .footer-btm .footer-btn-content .footer-social ul li a:hover {
 .service-details .how-we-work-section .work-item .single-work .work-icon {
   height: 60px;
   width: 60px;
-  border-radius: 50%;
-  background-color: var(--theme-color);
+  
   display: flex;
   align-items: center;
   justify-content: center;
