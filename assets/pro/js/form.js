@@ -481,7 +481,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var form_submit = function (e) {
       e.preventDefault();
       if (validate_form()) {
-        // use this trick to get the submit button & disable it using plain javascript
         var submitButton = e.target.querySelector('#_form_61_submit');
         submitButton.disabled = true;
         submitButton.classList.add('processing');
@@ -490,28 +489,43 @@ document.addEventListener("DOMContentLoaded", function () {
         ).replace(/%0A/g, '\\n');
         var err = form_to_submit.querySelector('._form_error');
         err ? err.parentNode.removeChild(err) : false;
+  
         async function submitForm() {
-          var formData = new FormData();
-          const searchParams = new URLSearchParams(serialized);
-          searchParams.forEach((value, key) => {
-            formData.append(key, value);
-          });
+          // Capturando UTMs da URL
+          const urlParams = new URLSearchParams(window.location.search);
+         
 
-          const response = await fetch('https://onebitcode84724.activehosted.com/proc.php?jsonp=true', {
-            headers: {
-              "Accept": "application/json"
-            },
-            body: formData,
-            method: "POST"
-          });
-          return response.json();
+          const utms = {
+            'utm_source': 'field[42]',    // Substitua '123' pelo ID do campo personalizado correto
+            'utm_medium': 'field[43]',    // Substitua '124' pelo ID do campo personalizado correto
+            'utm_campaign': 'field[44]',  // Substitua '125' pelo ID do campo personalizado correto
+            'utm_id': 'field[52]',  // Substitua '125' pelo ID do campo personalizado correto
+            'utm_term': 'field[46]',      // Substitua '127' pelo ID do campo personalizado correto
+            'utm_content': 'field[47]'    // Substitua '128' pelo ID do campo personalizado correto
+          };
+         
+          let utmQueryString = "";
+  
+          for (const [utm, fieldId] of Object.entries(utms)) {
+            if (urlParams.get(utm)) {
+              // Adicionando ao query string para envio
+              utmQueryString += `&${fieldId}=${encodeURIComponent(urlParams.get(utm))}`;
+            }
+          }
+  
+          // Montando a URL com os UTMs incluídos
+          const finalUrl = 'https://onebitcode84724.activehosted.com/proc.php?' + serialized + utmQueryString + '&jsonp=true';
+  
+          // Enviando o formulário com os UTMs para o Active Campaign
+          _load_script(finalUrl, null, true);
         }
+  
         if (formSupportsPost) {
           submitForm().then((data) => {
             eval(data.js);
           });
         } else {
-          _load_script('https://onebitcode84724.activehosted.com/proc.php?' + serialized + '&jsonp=true', null, true);
+          submitForm();
         }
       }
       return false;
