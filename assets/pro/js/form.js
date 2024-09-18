@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  var formLoadTime = Date.now(); // Registra o tempo de carregamento do formulário
+
   window.cfields = { "35": "li_e_aceito_os_termos_de_uso_e_poltica_de_privacidade" };
   window._show_thank_you = function (id, message, trackcmp_url, email) {
     var form = document.getElementById('_form_' + id + '_'), thank_you = form.querySelector('._form-thank-you');
@@ -480,56 +482,57 @@ document.addEventListener("DOMContentLoaded", function () {
     const formSupportsPost = false;
     var form_submit = function (e) {
       e.preventDefault();
+
+      var timeElapsed = Date.now() - formLoadTime;
+      if (timeElapsed < 3000) { // Se menos de 3 segundos se passaram
+        alert("Por favor, aguarde pelo menos 3 segundos antes de enviar o formulário.");
+        return false; // Impede o envio do formulário
+      }
+
       if (validate_form()) {
+        // Verificando o desafio de matemática
+        var mathChallengeValue = document.getElementById('mathChallenge').value;
+        if (mathChallengeValue != '7') {  // A resposta correta é 7
+          alert("Resposta incorreta. Por favor, tente novamente.");
+          return false;  // Impede o envio do formulário
+        }
+    
+        // Se a resposta estiver correta, continue com o envio do formulário
         var submitButton = e.target.querySelector('#_form_61_submit');
         submitButton.disabled = true;
         submitButton.classList.add('processing');
-        var serialized = _form_serialize(
-          document.getElementById('_form_61_')
-        ).replace(/%0A/g, '\\n');
+        var serialized = _form_serialize(document.getElementById('_form_61_')).replace(/%0A/g, '\\n');
         var err = form_to_submit.querySelector('._form_error');
         err ? err.parentNode.removeChild(err) : false;
-  
+    
         async function submitForm() {
-          // Capturando UTMs da URL
           const urlParams = new URLSearchParams(window.location.search);
-         
-
           const utms = {
-            'utm_source': 'field[42]',    // Substitua '123' pelo ID do campo personalizado correto
-            'utm_medium': 'field[43]',    // Substitua '124' pelo ID do campo personalizado correto
-            'utm_campaign': 'field[44]',  // Substitua '125' pelo ID do campo personalizado correto
-            'utm_id': 'field[52]',  // Substitua '125' pelo ID do campo personalizado correto
-            'utm_term': 'field[46]',      // Substitua '127' pelo ID do campo personalizado correto
-            'utm_content': 'field[47]'    // Substitua '128' pelo ID do campo personalizado correto
+            'utm_source': 'field[42]',    
+            'utm_medium': 'field[43]',    
+            'utm_campaign': 'field[44]',  
+            'utm_id': 'field[52]',        
+            'utm_term': 'field[46]',      
+            'utm_content': 'field[47]'    
           };
-         
+    
           let utmQueryString = "";
-  
+    
           for (const [utm, fieldId] of Object.entries(utms)) {
             if (urlParams.get(utm)) {
-              // Adicionando ao query string para envio
               utmQueryString += `&${fieldId}=${encodeURIComponent(urlParams.get(utm))}`;
             }
           }
-  
-          // Montando a URL com os UTMs incluídos
+    
           const finalUrl = 'https://onebitcode84724.activehosted.com/proc.php?' + serialized + utmQueryString + '&jsonp=true';
-  
-          // Enviando o formulário com os UTMs para o Active Campaign
           _load_script(finalUrl, null, true);
         }
-  
-        if (formSupportsPost) {
-          submitForm().then((data) => {
-            eval(data.js);
-          });
-        } else {
-          submitForm();
-        }
+    
+        submitForm();
       }
       return false;
     };
+    
     addEvent(form_to_submit, 'submit', form_submit);
   })();
 
