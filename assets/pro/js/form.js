@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   window._load_script = function (url, callback, isSubmit) {
     var head = document.querySelector('head'), script = document.createElement('script'), r = false;
-    var submitButton = document.querySelector('#_form_61_submit');
+    var submitButton = document.querySelector('#_form_75_submit');
     script.charset = 'utf-8';
     script.src = url;
     if (callback) {
@@ -77,9 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
     script.onerror = function () {
       if (isSubmit) {
         if (script.src.length > 10000) {
-          _show_error("61", "Desculpe, seu envio falhou. Deixe suas respostas mais curtas e tente novamente.");
+          _show_error("75", "Desculpe, seu envio falhou. Deixe suas respostas mais curtas e tente novamente.");
         } else {
-          _show_error("61", "Desculpe, seu envio falhou. Tente novamente.");
+          _show_error("75", "Desculpe, seu envio falhou. Tente novamente.");
         }
         submitButton.disabled = false;
         submitButton.classList.remove('processing');
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
     var _removed = false;
-    var form_to_submit = document.getElementById('_form_61_');
+    var form_to_submit = document.getElementById('_form_75_');
     var allInputs = form_to_submit.querySelectorAll('input, select, textarea'), tooltips = [], submitted = false;
 
     var getUrlParam = function (name) {
@@ -498,10 +498,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     
         // Se a resposta estiver correta, continue com o envio do formulário
-        var submitButton = e.target.querySelector('#_form_61_submit');
+        var submitButton = e.target.querySelector('#_form_75_submit');
         submitButton.disabled = true;
         submitButton.classList.add('processing');
-        var serialized = _form_serialize(document.getElementById('_form_61_')).replace(/%0A/g, '\\n');
+        var serialized = _form_serialize(document.getElementById('_form_75_')).replace(/%0A/g, '\\n');
         var err = form_to_submit.querySelector('._form_error');
         err ? err.parentNode.removeChild(err) : false;
     
