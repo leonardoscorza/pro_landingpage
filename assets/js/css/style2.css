@@ -11153,6 +11153,8 @@ img.translucent-bw {
   width: 150px;
 }
 
+
+
 /* Define as animações de glitch */
 @keyframes glitch-animation {
   0% {
@@ -11179,3 +11181,4 @@ img.translucent-bw {
     clip-path: inset(0);
   }
 }
+

@@ -483,6 +483,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var form_submit = function (e) {
       e.preventDefault();
 
+      // Verifica o campo honeypot
+      var honeypotValue = document.getElementById('honeypot').value;
+      if (honeypotValue !== '') {
+        alert("Detecção de bot: campo invisível foi preenchido.");
+        return false;  // Impede o envio se o honeypot estiver preenchido
+      }
+
       var timeElapsed = Date.now() - formLoadTime;
       if (timeElapsed < 3000) { // Se menos de 3 segundos se passaram
         alert("Por favor, aguarde pelo menos 3 segundos antes de enviar o formulário.");
