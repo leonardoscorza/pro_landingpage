@@ -13106,7 +13106,6 @@ img.translucent-bw {
 
 .header-area2 {
   position: relative; /* Deixa o menu em posição padrão abaixo da faixa */
-  margin-top: 40px; /* Dá espaço para a faixa fixa, ajustando conforme a altura da faixa */
   z-index: 1000;
   width: 100%;
   background-color: #000; /* Certifique-se de que o menu tenha um fundo visível */
@@ -13120,7 +13119,6 @@ img.translucent-bw {
   }
 
   .header-area2 {
-      margin-top: 80px; /* Ajusta o espaço para a faixa em dispositivos móveis */
   }
 }
 
