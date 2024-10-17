@@ -476,34 +476,34 @@ document.addEventListener("DOMContentLoaded", function () {
       input.classList.add("phone-input-error");
     };
 
+    window['recaptcha_callback'] = function() {
+      // Get all recaptchas in the DOM (there may be more than one form on the page).
+      var recaptchas = document.getElementsByClassName("g-recaptcha");
+      for (var i in recaptchas) {
+        // Set the recaptcha element ID, so the recaptcha can be applied to each element.
+        var recaptcha_id = "recaptcha_" + i;
+        recaptchas[i].id = recaptcha_id;
+        var el = document.getElementById(recaptcha_id);
+        if (el != null) {
+          var sitekey = el.getAttribute("data-sitekey");
+          var stoken = el.getAttribute("data-stoken");
+          grecaptcha.render(recaptcha_id, {"sitekey":sitekey,"stoken":stoken});
+        }
+      }
+    };    _load_script(
+            "https://www.google.com/recaptcha/api.js?onload=recaptcha_callback&render=explicit"
+        );
 
-    var _form_serialize = function (form) { if (!form || form.nodeName !== "FORM") { return } var i, j, q = []; for (i = 0; i < form.elements.length; i++) { if (form.elements[i].name === "") { continue } switch (form.elements[i].nodeName) { case "INPUT": switch (form.elements[i].type) { case "tel": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].previousSibling.querySelector('div.iti__selected-dial-code').innerText) + encodeURIComponent(" ") + encodeURIComponent(form.elements[i].value)); break; case "text": case "number": case "date": case "time": case "hidden": case "password": case "button": case "reset": case "submit": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "checkbox": case "radio": if (form.elements[i].checked) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)) } break; case "file": break }break; case "TEXTAREA": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "SELECT": switch (form.elements[i].type) { case "select-one": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "select-multiple": for (j = 0; j < form.elements[i].options.length; j++) { if (form.elements[i].options[j].selected) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].options[j].value)) } } break }break; case "BUTTON": switch (form.elements[i].type) { case "reset": case "submit": case "button": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break }break } } return q.join("&") };
+
+        var _form_serialize = function(form){if(!form||form.nodeName!=="FORM"){return }var i,j,q=[];for(i=0;i<form.elements.length;i++){if(form.elements[i].name===""){continue}switch(form.elements[i].nodeName){case"INPUT":switch(form.elements[i].type){case"tel":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].previousSibling.querySelector('div.iti__selected-dial-code').innerText)+encodeURIComponent(" ")+encodeURIComponent(form.elements[i].value));break;case"text":case"number":case"date":case"time":case"hidden":case"password":case"button":case"reset":case"submit":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"checkbox":case"radio":if(form.elements[i].checked){q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value))}break;case"file":break}break;case"TEXTAREA":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"SELECT":switch(form.elements[i].type){case"select-one":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"select-multiple":for(j=0;j<form.elements[i].options.length;j++){if(form.elements[i].options[j].selected){q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].options[j].value))}}break}break;case"BUTTON":switch(form.elements[i].type){case"reset":case"submit":case"button":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break}break}}return q.join("&")};
 
     const formSupportsPost = false;
     var form_submit = function (e) {
       e.preventDefault();
 
-      // Verifica o campo honeypot
-      var honeypotValue = document.getElementById('honeypot').value;
-      if (honeypotValue !== '') {
-        alert("Detecção de bot: campo invisível foi preenchido.");
-        return false;  // Impede o envio se o honeypot estiver preenchido
-      }
-
-      var timeElapsed = Date.now() - formLoadTime;
-      if (timeElapsed < 3000) { // Se menos de 3 segundos se passaram
-        alert("Por favor, aguarde pelo menos 3 segundos antes de enviar o formulário.");
-        return false; // Impede o envio do formulário
-      }
 
       if (validate_form()) {
-        // Verificando o desafio de matemática
-        var mathChallengeValue = document.getElementById('mathChallenge').value;
-        if (mathChallengeValue != '7') {  // A resposta correta é 7
-          alert("Resposta incorreta. Por favor, tente novamente.");
-          return false;  // Impede o envio do formulário
-        }
-    
+
         // Se a resposta estiver correta, continue com o envio do formulário
         var submitButton = e.target.querySelector('#_form_75_submit');
         submitButton.disabled = true;
