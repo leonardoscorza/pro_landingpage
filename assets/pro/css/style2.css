@@ -13036,7 +13036,7 @@ img.translucent-bw {
 .header-area2 {
   position: relative;
   /* Deixa o menu em posição padrão abaixo da faixa */
-  margin-top: 40px;
+  /* margin-top: 40px; */
   /* Dá espaço para a faixa fixa, ajustando conforme a altura da faixa */
   z-index: 1000;
   width: 100%;
@@ -13054,7 +13054,7 @@ img.translucent-bw {
   }
 
   .header-area2 {
-    margin-top: 80px;
+    /* margin-top: 80px; */
     /* Ajusta o espaço para a faixa em dispositivos móveis */
   }
 }
@@ -13090,3 +13090,36 @@ img.translucent-bw {
     clip-path: inset(0);
   }
 }
+.informative-banner {
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 16px;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  position: fixed; /* Fixa a faixa no topo */
+  top: 0; /* Alinha a faixa no topo da tela */
+  left: 0;
+  z-index: 1001; /* Garante que a faixa esteja acima do menu */
+}
+
+.header-area2 {
+  position: relative; /* Deixa o menu em posição padrão abaixo da faixa */
+  z-index: 1000;
+  width: 100%;
+  background-color: #000; /* Certifique-se de que o menu tenha um fundo visível */
+}
+
+/* Responsividade */
+@media (max-width: 767px) {
+  .informative-banner {
+      font-size: 14px; /* Fonte ligeiramente menor para telas pequenas */
+      padding: 10px; /* Ajuste de padding para dispositivos móveis */
+  }
+
+  .header-area2 {
+  }
+}
+
+

@@ -481,23 +481,51 @@ document.addEventListener("DOMContentLoaded", function () {
     var form_submit = function (e) {
       e.preventDefault();
       if (validate_form()) {
-        // use this trick to get the submit button & disable it using plain javascript
+        // Desativando o botão de envio
         var submitButton = e.target.querySelector('#_form_59_submit');
         submitButton.disabled = true;
         submitButton.classList.add('processing');
+        
+        // Serializando os dados do formulário
         var serialized = _form_serialize(
           document.getElementById('_form_59_')
         ).replace(/%0A/g, '\\n');
+        
         var err = form_to_submit.querySelector('._form_error');
-        err ? err.parentNode.removeChild(err) : false;
+        if (err) err.parentNode.removeChild(err);
+    
+        // Capturando UTMs da URL e mapeando para os campos corretos
+        const urlParams = new URLSearchParams(window.location.search);
+        const utms = {
+          'utm_source': 'field[42]',    // Substitua '42' pelo ID do campo personalizado correto
+          'utm_medium': 'field[43]',    // Substitua '43' pelo ID do campo personalizado correto
+          'utm_campaign': 'field[44]',  // Substitua '44' pelo ID do campo personalizado correto
+          'utm_id': 'field[52]',        // Substitua '52' pelo ID do campo personalizado correto
+          'utm_term': 'field[46]',      // Substitua '46' pelo ID do campo personalizado correto
+          'utm_content': 'field[47]'    // Substitua '47' pelo ID do campo personalizado correto
+        };
+        
+        let utmQueryString = "";
+    
+        for (const [utm, fieldId] of Object.entries(utms)) {
+          if (urlParams.get(utm)) {
+            // Adicionando as UTMs ao query string
+            utmQueryString += `&${fieldId}=${encodeURIComponent(urlParams.get(utm))}`;
+          }
+        }
+    
+        // Montando a URL final com os dados do formulário e UTMs
+        const finalUrl = 'https://onebitcode84724.activehosted.com/proc.php?' + serialized + utmQueryString + '&jsonp=true';
+    
         async function submitForm() {
           var formData = new FormData();
           const searchParams = new URLSearchParams(serialized);
           searchParams.forEach((value, key) => {
             formData.append(key, value);
           });
-
-          const response = await fetch('https://onebitcode84724.activehosted.com/proc.php?jsonp=true', {
+    
+          // Fazendo o envio para o Active Campaign
+          const response = await fetch(finalUrl, {
             headers: {
               "Accept": "application/json"
             },
@@ -506,16 +534,20 @@ document.addEventListener("DOMContentLoaded", function () {
           });
           return response.json();
         }
+    
         if (formSupportsPost) {
           submitForm().then((data) => {
             eval(data.js);
           });
         } else {
-          _load_script('https://onebitcode84724.activehosted.com/proc.php?' + serialized + '&jsonp=true', null, true);
+          // Se o método POST não for suportado, use _load_script para GET
+          _load_script(finalUrl, null, true);
         }
       }
       return false;
     };
+    
+    // Adicionando o evento de submissão ao formulário
     addEvent(form_to_submit, 'submit', form_submit);
   })();
 

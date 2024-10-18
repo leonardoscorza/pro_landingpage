@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  var formLoadTime = Date.now(); // Registra o tempo de carregamento do formulário
+
   window.cfields = { "35": "li_e_aceito_os_termos_de_uso_e_poltica_de_privacidade" };
   window._show_thank_you = function (id, message, trackcmp_url, email) {
     var form = document.getElementById('_form_' + id + '_'), thank_you = form.querySelector('._form-thank-you');
@@ -61,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   window._load_script = function (url, callback, isSubmit) {
     var head = document.querySelector('head'), script = document.createElement('script'), r = false;
-    var submitButton = document.querySelector('#_form_61_submit');
+    var submitButton = document.querySelector('#_form_75_submit');
     script.charset = 'utf-8';
     script.src = url;
     if (callback) {
@@ -75,9 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
     script.onerror = function () {
       if (isSubmit) {
         if (script.src.length > 10000) {
-          _show_error("61", "Desculpe, seu envio falhou. Deixe suas respostas mais curtas e tente novamente.");
+          _show_error("75", "Desculpe, seu envio falhou. Deixe suas respostas mais curtas e tente novamente.");
         } else {
-          _show_error("61", "Desculpe, seu envio falhou. Tente novamente.");
+          _show_error("75", "Desculpe, seu envio falhou. Tente novamente.");
         }
         submitButton.disabled = false;
         submitButton.classList.remove('processing');
@@ -111,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
     var _removed = false;
-    var form_to_submit = document.getElementById('_form_61_');
+    var form_to_submit = document.getElementById('_form_75_');
     var allInputs = form_to_submit.querySelectorAll('input, select, textarea'), tooltips = [], submitted = false;
 
     var getUrlParam = function (name) {
@@ -474,48 +476,70 @@ document.addEventListener("DOMContentLoaded", function () {
       input.classList.add("phone-input-error");
     };
 
+    window['recaptcha_callback'] = function() {
+      // Get all recaptchas in the DOM (there may be more than one form on the page).
+      var recaptchas = document.getElementsByClassName("g-recaptcha");
+      for (var i in recaptchas) {
+        // Set the recaptcha element ID, so the recaptcha can be applied to each element.
+        var recaptcha_id = "recaptcha_" + i;
+        recaptchas[i].id = recaptcha_id;
+        var el = document.getElementById(recaptcha_id);
+        if (el != null) {
+          var sitekey = el.getAttribute("data-sitekey");
+          var stoken = el.getAttribute("data-stoken");
+          grecaptcha.render(recaptcha_id, {"sitekey":sitekey,"stoken":stoken});
+        }
+      }
+    };    _load_script(
+            "https://www.google.com/recaptcha/api.js?onload=recaptcha_callback&render=explicit"
+        );
 
-    var _form_serialize = function (form) { if (!form || form.nodeName !== "FORM") { return } var i, j, q = []; for (i = 0; i < form.elements.length; i++) { if (form.elements[i].name === "") { continue } switch (form.elements[i].nodeName) { case "INPUT": switch (form.elements[i].type) { case "tel": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].previousSibling.querySelector('div.iti__selected-dial-code').innerText) + encodeURIComponent(" ") + encodeURIComponent(form.elements[i].value)); break; case "text": case "number": case "date": case "time": case "hidden": case "password": case "button": case "reset": case "submit": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "checkbox": case "radio": if (form.elements[i].checked) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)) } break; case "file": break }break; case "TEXTAREA": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "SELECT": switch (form.elements[i].type) { case "select-one": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "select-multiple": for (j = 0; j < form.elements[i].options.length; j++) { if (form.elements[i].options[j].selected) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].options[j].value)) } } break }break; case "BUTTON": switch (form.elements[i].type) { case "reset": case "submit": case "button": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break }break } } return q.join("&") };
+
+        var _form_serialize = function(form){if(!form||form.nodeName!=="FORM"){return }var i,j,q=[];for(i=0;i<form.elements.length;i++){if(form.elements[i].name===""){continue}switch(form.elements[i].nodeName){case"INPUT":switch(form.elements[i].type){case"tel":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].previousSibling.querySelector('div.iti__selected-dial-code').innerText)+encodeURIComponent(" ")+encodeURIComponent(form.elements[i].value));break;case"text":case"number":case"date":case"time":case"hidden":case"password":case"button":case"reset":case"submit":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"checkbox":case"radio":if(form.elements[i].checked){q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value))}break;case"file":break}break;case"TEXTAREA":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"SELECT":switch(form.elements[i].type){case"select-one":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"select-multiple":for(j=0;j<form.elements[i].options.length;j++){if(form.elements[i].options[j].selected){q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].options[j].value))}}break}break;case"BUTTON":switch(form.elements[i].type){case"reset":case"submit":case"button":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break}break}}return q.join("&")};
 
     const formSupportsPost = false;
     var form_submit = function (e) {
       e.preventDefault();
+
+
       if (validate_form()) {
-        // use this trick to get the submit button & disable it using plain javascript
-        var submitButton = e.target.querySelector('#_form_61_submit');
+
+        // Se a resposta estiver correta, continue com o envio do formulário
+        var submitButton = e.target.querySelector('#_form_75_submit');
         submitButton.disabled = true;
         submitButton.classList.add('processing');
-        var serialized = _form_serialize(
-          document.getElementById('_form_61_')
-        ).replace(/%0A/g, '\\n');
+        var serialized = _form_serialize(document.getElementById('_form_75_')).replace(/%0A/g, '\\n');
         var err = form_to_submit.querySelector('._form_error');
         err ? err.parentNode.removeChild(err) : false;
+    
         async function submitForm() {
-          var formData = new FormData();
-          const searchParams = new URLSearchParams(serialized);
-          searchParams.forEach((value, key) => {
-            formData.append(key, value);
-          });
-
-          const response = await fetch('https://onebitcode84724.activehosted.com/proc.php?jsonp=true', {
-            headers: {
-              "Accept": "application/json"
-            },
-            body: formData,
-            method: "POST"
-          });
-          return response.json();
+          const urlParams = new URLSearchParams(window.location.search);
+          const utms = {
+            'utm_source': 'field[42]',    
+            'utm_medium': 'field[43]',    
+            'utm_campaign': 'field[44]',  
+            'utm_id': 'field[52]',        
+            'utm_term': 'field[46]',      
+            'utm_content': 'field[47]'    
+          };
+    
+          let utmQueryString = "";
+    
+          for (const [utm, fieldId] of Object.entries(utms)) {
+            if (urlParams.get(utm)) {
+              utmQueryString += `&${fieldId}=${encodeURIComponent(urlParams.get(utm))}`;
+            }
+          }
+    
+          const finalUrl = 'https://onebitcode84724.activehosted.com/proc.php?' + serialized + utmQueryString + '&jsonp=true';
+          _load_script(finalUrl, null, true);
         }
-        if (formSupportsPost) {
-          submitForm().then((data) => {
-            eval(data.js);
-          });
-        } else {
-          _load_script('https://onebitcode84724.activehosted.com/proc.php?' + serialized + '&jsonp=true', null, true);
-        }
+    
+        submitForm();
       }
       return false;
     };
+    
     addEvent(form_to_submit, 'submit', form_submit);
   })();
 
