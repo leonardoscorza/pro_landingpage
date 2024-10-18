@@ -10200,7 +10200,7 @@ footer .footer-btm .footer-btn-content .footer-social ul li a:hover {
 }
 
 .home6-contact-section .contact-form-wrap {
-  background-image: url(../img/home-4/pricing-bg-3.png), linear-gradient(#171717, #171717);
+  background-image: linear-gradient(#505050, #505050);
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
@@ -12670,7 +12670,7 @@ footer .footer-btm .footer-btn-content .footer-social ul li a:hover {
 }
 
 .contact-page-wrap .contact-form-wrap {
-  background-image: url(../img/home-4/pricing-bg-3.png), linear-gradient(#171717, #171717);
+  background-image: linear-gradient(#222222, #222222);
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
