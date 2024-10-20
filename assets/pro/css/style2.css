@@ -6507,7 +6507,7 @@ video {
 }
 
 .home3-contact-area {
-  background-image: url(../img/home-3/home3-contact-bg-min.png);
+  background-image: url(../img/home-3/banner-final.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -6516,6 +6516,7 @@ video {
   position: relative;
   z-index: 1;
 }
+
 
 .home3-contact-area::after {
   content: "";
